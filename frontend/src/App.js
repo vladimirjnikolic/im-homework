@@ -1,14 +1,13 @@
 import "./App.css";
-import { Button, VisuallyHiddenInput } from "@mui/material";
-import { CloudUploadIcon } from "@emotion/react";
-import InputFileUpload from "components/InputFileUpload";
+import { StyledEngineProvider } from "@mui/material/styles";
+import MainPage from "components/MainPage";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <InputFileUpload />
-      </header>
+      <StyledEngineProvider injectFirst>
+        <MainPage />
+      </StyledEngineProvider>
     </div>
   );
 }

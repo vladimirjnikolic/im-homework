@@ -7,7 +7,7 @@ import {
 } from "./InputFileUploadConsts";
 
 test("selection of more than 5 files shows alert", async () => {
-  render(<InputFileUpload />);
+  render(<InputFileUpload uploadFiles={(files) => {}} />);
   const input = document.querySelector('input[type="file"]');
   const files = [];
   for (let i = 1; i <= MAX_FILE_UPLOAD + 1; i++) {
@@ -23,7 +23,7 @@ test("selection of more than 5 files shows alert", async () => {
 });
 
 test("selection up to 5 files pass", async () => {
-  render(<InputFileUpload />);
+  render(<InputFileUpload uploadFiles={(files) => {}} />);
   const input = document.querySelector('input[type="file"]');
   const files = [];
   for (let i = 1; i <= MAX_FILE_UPLOAD; i++) {

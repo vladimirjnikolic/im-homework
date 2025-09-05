@@ -1,13 +1,14 @@
-## Running the server
-
-1. Open this folder from your IDE or Terminal of preference
-1. Install dependencies
+### Create the `.env` file and add these parameters
 
 ```sh
-npm install
+PORT=3001
+BUCKET_NAME
+ACCESS_KEY_ID
+SECRET_ACCESS_KEY
+REGION
 ```
 
-### Run in localhost, anonymous mode
+### Run the server locally with full install
 
 1. Start the application
 

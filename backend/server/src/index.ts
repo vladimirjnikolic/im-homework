@@ -1,15 +1,12 @@
-import express, { Request, Response } from "express";
+import express from "express";
 import cors from "cors";
+import uploadRoutes from "./api/routes/uploadRoutes";
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.post("/api/upload", async (req: Request, res: Response) => {
-  console.log("Received upload request");
-  res.status(200);
-  res.send("Image received and processed");
-});
+app.use("/api", uploadRoutes);
 
 const port = process.env.PORT || 3001;
 app

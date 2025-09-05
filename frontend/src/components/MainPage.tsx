@@ -5,6 +5,7 @@ import SelectImageSize from "./SelectImageSize/SelectImageSize";
 import InputFileUpload from "./InputFileUpload/InputFileUpload";
 import { useState } from "react";
 import { resizeImages } from "api/resizeService";
+import { v4 as uuidv4 } from "uuid";
 
 const MainPage = () => {
   const [size, setSize] = useState<string>("");
@@ -12,9 +13,11 @@ const MainPage = () => {
     if (files.length > 0 && size) {
       const formData = new FormData();
       formData.append("size", size);
+      const uploadId = uuidv4();
+      formData.append("uploadId", uploadId);
       for (let i = 0; i < files.length; i++) {
         const file = files.item(i);
-        file && formData.append(`file${i}`, file, file.name);
+        file && formData.append("file", file, file.name);
       }
       try {
         console.log("Uploading files...");

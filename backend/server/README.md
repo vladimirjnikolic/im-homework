@@ -6,6 +6,8 @@ BUCKET_NAME
 ACCESS_KEY_ID
 SECRET_ACCESS_KEY
 REGION
+CUSTOMER
+MESSAGE_QUEUE
 ```
 
 ### Run the server locally with full install

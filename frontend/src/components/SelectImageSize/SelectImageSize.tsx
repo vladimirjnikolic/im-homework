@@ -4,13 +4,14 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
-import { useState } from "react";
 
-const SelectImageSize = () => {
-  const [size, setSize] = useState<string>("");
+interface ISelectImageSize {
+  size?: string;
+  setSize: (size: string) => void;
+}
 
+const SelectImageSize = ({ size, setSize }: ISelectImageSize) => {
   const handleChange = (event: SelectChangeEvent) => {
-    console.log(event.target.value);
     setSize(event.target.value as string);
   };
 

@@ -20,13 +20,17 @@ const VisuallyHiddenInput = styled("input")({
   width: 1,
 });
 
-const InputFileUpload = () => {
+interface IInputFileUpload {
+  uploadFiles: (files: FileList) => void;
+}
+
+const InputFileUpload = ({ uploadFiles }: IInputFileUpload) => {
   const filesSelected = (event: any) => {
     if (event.target.files?.length > MAX_FILE_UPLOAD) {
       alert(NUMBER_OF_FILES_EXCEEDED_MESSAGE);
+    } else {
+      uploadFiles(event.target.files);
     }
-
-    //console.log(event.target.files);
   };
 
   return (

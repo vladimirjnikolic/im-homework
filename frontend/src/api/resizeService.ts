@@ -10,3 +10,12 @@ export const resizeImages = async (formData: FormData) => {
   });
   return response.data;
 };
+
+export const checkStatus = async (uploadId: string, fileName: string) => {
+  const response = await axois.get(
+    `${API_URL}/api/check-status?uploadId=${uploadId}&fileName=${encodeURIComponent(
+      fileName
+    )}`
+  );
+  return response.data;
+};

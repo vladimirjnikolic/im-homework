@@ -7,6 +7,8 @@ import { useEffect, useState } from "react";
 import { checkStatus, resizeImages } from "api/resizeService";
 import { v4 as uuidv4 } from "uuid";
 import { IUpload } from "model/IUpload";
+import { ImagesTable } from "./ImagesTable/ImagesTable";
+import { IFileProcessing } from "model/IFileProcessing";
 
 const MainPage = () => {
   const [size, setSize] = useState<string>("");
@@ -55,12 +57,12 @@ const MainPage = () => {
             if (file.status === "completed" || file.status === "failed")
               continue;
             try {
-              const downloadUrl = await checkStatus(
+              const statusResponse = await checkStatus(
                 file.uploadId,
                 file.fileName
               );
               file.status = "completed";
-              file.downloadUrl = downloadUrl;
+              file.downloadUrl = statusResponse.downloadUrl;
             } catch (error: any) {
               if (error.response && error.response.status === 410) {
                 file.status = "failed";
@@ -84,6 +86,13 @@ const MainPage = () => {
         </Grid>
         <Grid size={4}>
           <InputFileUpload uploadFiles={uploadFiles} />
+        </Grid>
+        <Grid size={12} sx={{ mt: 4 }}>
+          <ImagesTable
+            items={uploads.flatMap<IFileProcessing>((upload) => [
+              ...upload.files,
+            ])}
+          />
         </Grid>
       </Grid>
     </Box>

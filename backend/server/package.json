@@ -1,6 +1,6 @@
 {
   "name": "im-homework-server",
-  "version": "0.3.0",
+  "version": "1.0.0",
   "private": true,
   "description": "Service for image resizing",
   "license": "MIT",
@@ -8,8 +8,8 @@
   "scripts": {
     "prebuild": "npm ci",
     "build": "tsc --build",
-    "prestart": "npm run build",
-    "start": "node --env-file .env ./dist/index.js"
+    "preserver": "npm run build",
+    "server": "node --env-file .env ./dist/index.js"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.882.0",

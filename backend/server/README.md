@@ -15,5 +15,5 @@ MESSAGE_QUEUE
 1. Start the application
 
 ```sh
-npm run start
+npm run server
 ```

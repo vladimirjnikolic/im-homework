@@ -1,6 +1,6 @@
 {
   "name": "im-homework-server",
-  "version": "0.3.0",
+  "version": "1.0.0",
   "private": true,
   "description": "Worker for image resizing",
   "license": "MIT",

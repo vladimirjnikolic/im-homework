@@ -18,9 +18,15 @@ const upload = multer({
       cb(null, Object.assign({}, (req as any).body));
     },
     key: function (req, file, cb) {
-      const fileName = (req as any).body.uploadId
-        ? `${(req as any).body.uploadId}_${file.originalname}`
-        : file.originalname;
+      const originalName = file.originalname;
+      const uploadId = (req as any).body.uploadId;
+      const dotIndex = originalName.lastIndexOf(".");
+      const nameWithoutExt =
+        dotIndex !== -1 ? originalName.substring(0, dotIndex) : originalName;
+      const ext = dotIndex !== -1 ? originalName.substring(dotIndex + 1) : "";
+      const fileName = uploadId
+        ? `${nameWithoutExt}_${uploadId}${ext ? "." + ext : ""}`
+        : originalName;
       cb(null, fileName);
     },
     contentType: multerS3.AUTO_CONTENT_TYPE,

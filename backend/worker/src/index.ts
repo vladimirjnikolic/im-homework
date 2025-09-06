@@ -33,9 +33,6 @@ setInterval(async () => {
           throw new Error("Invalid size");
       }
 
-      const image = await sharp(imageBuffer)
-        .resize(imageWidth, imageHeight)
-        .toBuffer();
       const fileName = body.fileName.replace(
         /\.(jpg|jpeg|png)$/,
         "_resized.$1"
@@ -47,7 +44,19 @@ setInterval(async () => {
       } else if (fileName.endsWith(".jpg") || fileName.endsWith(".jpeg")) {
         mimeType = "image/jpeg";
       }
-      await uploadImageToS3(image, fileName, mimeType);
+
+      try {
+        const image = await sharp(imageBuffer)
+          .resize(imageWidth, imageHeight)
+          .toBuffer();
+        await uploadImageToS3(image, fileName, mimeType);
+      } catch (error) {
+        await uploadImageToS3(
+          Buffer.from("../error/error.png"),
+          body.fileName.replace(/\.(jpg|jpeg|png)$/, "_error.$1"),
+          mimeType
+        );
+      }
     }
   } catch (error) {
     console.error("Error receiving message:", error);

@@ -21,14 +21,16 @@ export const sendMessage = async (
   uploadId: string,
   fileNames: string[]
 ) => {
-  const command = new SendMessageCommand({
-    QueueUrl: queueUrl,
-    MessageBody: JSON.stringify({
-      size,
-      uploadId,
-      fileNames,
-    }),
-  });
+  for (const fileName of fileNames) {
+    const command = new SendMessageCommand({
+      QueueUrl: queueUrl,
+      MessageBody: JSON.stringify({
+        size,
+        uploadId,
+        fileName,
+      }),
+    });
 
-  await sqsClient.send(command);
+    await sqsClient.send(command);
+  }
 };
